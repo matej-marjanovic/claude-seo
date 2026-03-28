@@ -1,0 +1,1 @@
+/Users/matejmarjanovic/Developer/claude-seo/agents/seo-geo.md
