@@ -222,12 +222,30 @@ When DataForSEO is available, the core analysis scripts gain real-time data:
 3. **Keyword volume** data replaces guesswork with real search demand numbers
 4. **Backlinks summary** provides domain authority, spam scores, referring domain counts
 
-### Notes
+### Module subscription notes
+
+Not all modules are available on every DataForSEO plan:
+
+| Module | Availability |
+|--------|-------------|
+| SERP (incl. AI Overview) | ✅ Included in standard plans |
+| KEYWORDS_DATA | ✅ Included in standard plans |
+| DATAFORSEO_LABS | ✅ Included in standard plans |
+| ON-PAGE (Lighthouse) | ✅ Included in standard plans |
+| DOMAIN_ANALYTICS | ✅ Included in standard plans |
+| CONTENT_ANALYSIS | ✅ Included in standard plans |
+| BUSINESS_DATA | ✅ Included in standard plans |
+| BACKLINKS | ❌ Requires separate subscription activation |
+| AI_OPTIMIZATION | ❌ Dedicated endpoints (ChatGPT scraper, LLM mentions) require separate module activation |
+
+AI Overview data is available through the standard SERP module (returned as an
+`ai_overview` item type alongside organic results).
+
+### Other notes
 
 - DataForSEO charges per API call; prefer bulk endpoints and default `limit=100`
 - Default parameters: `location_code=2840` (US), `language_code=en`
 - The `field-config.json` in the extension reduces API response sizes by ~75%
-- Some modules (Labs, Backlinks) may require a paid plan beyond the free trial
 
 ## Cursor Cloud specific instructions
 
