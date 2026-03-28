@@ -1,10 +1,10 @@
-<!-- Updated: 2026-03-06 -->
+<!-- Updated: 2026-03-28 -->
 
 ![Claude SEO](screenshots/cover-image.jpeg)
 
 # Claude SEO - SEO Audit Skill for Claude Code, Cursor & Cursor Cloud
 
-Comprehensive SEO analysis skill for Claude Code — also compatible with Cursor and Cursor Cloud. Covers technical SEO, on-page analysis, content quality (E-E-A-T), schema markup, image optimization, sitemap architecture, AI search optimization (GEO), and strategic planning.
+Comprehensive SEO analysis skill for Claude Code — also compatible with Cursor and Cursor Cloud. Covers technical SEO, on-page analysis, content quality (E-E-A-T), schema markup, image optimization, sitemap architecture, AI search optimization (GEO), local SEO, maps intelligence, Google SEO APIs (Search Console, PageSpeed, CrUX, GA4), PDF report generation, and strategic planning.
 
 ![SEO Command Demo](screenshots/seo-command-demo.gif)
 
@@ -154,7 +154,11 @@ claude
 | `/seo plan <type>` | Strategic SEO planning (saas, local, ecommerce, publisher, agency) |
 | `/seo programmatic <url>` | Programmatic SEO analysis and planning |
 | `/seo competitor-pages <url>` | Competitor comparison page generation |
+| `/seo local <url>` | Local SEO analysis (GBP, citations, reviews, map pack) |
+| `/seo maps [command]` | Maps intelligence (geo-grid, GBP audit, reviews, competitors) |
 | `/seo hreflang <url>` | Hreflang/i18n SEO audit and generation |
+| `/seo google [command] [url]` | Google SEO APIs (GSC, PageSpeed, CrUX, Indexing, GA4) |
+| `/seo google report [type]` | Generate PDF/HTML report with charts (cwv-audit, gsc-performance, full) |
 
 ### `/seo programmatic [url|plan]`
 **Programmatic SEO Analysis & Planning**
@@ -224,6 +228,28 @@ New for 2026 - optimize for:
 - Perplexity
 - Other AI-powered search
 
+### Google SEO APIs (New in v1.7.0)
+Direct integration with Google's SEO data:
+- **PageSpeed Insights + CrUX**: Lab and field Core Web Vitals data
+- **Search Console**: Top queries, URL inspection, sitemap status
+- **Indexing API**: Notify Google of new/updated/removed URLs
+- **GA4**: Organic traffic, top landing pages, device/country breakdown
+- **PDF Reports**: Enterprise A4 reports with charts via WeasyPrint + matplotlib
+
+4-tier credential system — get value at every level:
+| Tier | Auth | APIs |
+|------|------|------|
+| 0 | API key | PSI, CrUX, CrUX History |
+| 1 | + OAuth/SA | + GSC, URL Inspection, Indexing |
+| 2 | + GA4 config | + GA4 organic traffic |
+| 3 | + Ads token | + Keyword Planner |
+
+### Local SEO & Maps Intelligence (New in v1.6.0)
+- Google Business Profile optimization
+- NAP consistency auditing
+- Citation and review analysis
+- Geo-grid rank tracking and competitor radius mapping
+
 ### Quality Gates
 - Warning at 30+ location pages
 - Hard stop at 50+ location pages
@@ -233,9 +259,9 @@ New for 2026 - optimize for:
 ## Architecture
 
 ```
-~/.claude/skills/seo/         # Main skill
-~/.claude/skills/seo-*/       # Sub-skills (12 total)
-~/.claude/agents/seo-*.md     # Subagents (7 total)
+~/.claude/skills/seo/         # Main orchestrator skill
+~/.claude/skills/seo-*/       # Sub-skills (15 + 2 extensions)
+~/.claude/agents/seo-*.md     # Subagents (10 + 2 extensions)
 ```
 
 ### Video & Live Schema (New)
@@ -260,6 +286,7 @@ See `schema/templates.json` for ready-to-use JSON-LD snippets.
 - Python 3.10+
 - Claude Code CLI, Cursor, or Cursor Cloud
 - Optional: Playwright for screenshots
+- Optional: Google API credentials for enriched data (see `/seo google setup`)
 
 ## Uninstall
 

@@ -12,7 +12,7 @@ license: MIT
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 metadata:
   author: AgriciDaniel
-  version: "1.6.1"
+  version: "1.7.0"
   category: seo
 ---
 

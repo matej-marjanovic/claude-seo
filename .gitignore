@@ -31,6 +31,16 @@ venv/
 env/
 .env/
 
+# Secrets and credentials (NEVER commit these)
+.env
+.env.*
+*.env
+**/.env
+**/client_secret*.json
+**/service_account*.json
+**/oauth-token.json
+**/.google-token.json
+
 # Node (if any)
 node_modules/
 
@@ -85,6 +95,10 @@ Cover Image.jpeg
 seo audit demo.gif
 seo command demo.gif
 .github-audit/
+
+# Generated Google SEO reports
+Google-SEO-Report-*.html
+Google-SEO-Report-*.pdf
 
 # Site-specific analysis outputs
 LOCAL-SEO-ANALYSIS-*.md

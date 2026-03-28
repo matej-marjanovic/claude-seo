@@ -13,6 +13,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **README Cursor section**: Added "Cursor / Cursor Cloud" section with setup instructions, script usage examples, and guidance on using skills/agents as `@context`
 - **Cursor Compatible badge**: Added to README alongside existing Claude Code badge
 
+## [1.7.0] - 2026-03-28
+
+### Added
+- **Google SEO APIs skill**: `skills/seo-google/SKILL.md` with 21 commands across 4 credential tiers
+- **Google subagent**: `agents/seo-google.md` for enriched audit data (CWV field data, indexation status, organic traffic)
+- **11 Python scripts**: google_auth.py, gsc_query.py, gsc_inspect.py, pagespeed_check.py, crux_history.py, indexing_notify.py, ga4_report.py, google_report.py, youtube_search.py, nlp_analyze.py, keyword_planner.py
+- **10 reference files**: auth-setup.md, search-console-api.md, pagespeed-crux-api.md, indexing-api.md, ga4-data-api.md, youtube-api.md, nlp-api.md, keyword-planner-api.md, supplementary-apis.md, rate-limits-quotas.md
+- **PDF report generator**: `scripts/google_report.py` with enterprise A4 template, WeasyPrint + matplotlib charts, post-generation quality review
+- **OAuth web credential flow**: Browser-based auth with localhost:8085 callback, token refresh, manual code exchange fallback
+- **4-tier credential system**: Tier 0 (API key: PSI/CrUX), Tier 1 (+OAuth/SA: GSC/Indexing), Tier 2 (+GA4), Tier 3 (+Ads Keyword Planner)
+- **Python dependencies**: google-api-python-client, google-auth, google-auth-oauthlib, google-auth-httplib2, google-analytics-data, matplotlib, weasyprint
+
+### Security
+- SSRF protection: `validate_url()` blocks private IPs, loopback, and GCP metadata endpoints in all Google API scripts
+- `.gitignore` hardened with 8 credential patterns: `.env`, `client_secret*.json`, `oauth-token.json`, `service_account*.json`
+- OAuth tokens no longer store `client_secret` (reads from client_secret.json file only)
+- Removed hardcoded user paths from all scripts (mobile_analysis.py, capture scripts)
+
+### Changed
+- Sub-skill count: 14 -> 15 core (+ 2 extensions)
+- Subagent count: 9 -> 10 core (+ 2 extension) with conditional Google API spawning
+- seo-audit spawns seo-google agent when Google API credentials detected
+- seo-technical and seo-performance can use CrUX field data when available
+- Report Generation Rules added to CLAUDE.md with color palette, dependency, and cross-skill enforcement
+- README updated with Google APIs, local SEO, maps, and PDF report features
+
+---
+
 ## [1.6.1] - 2026-03-27
 
 ### Added

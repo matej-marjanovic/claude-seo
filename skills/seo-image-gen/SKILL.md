@@ -8,7 +8,7 @@ allowed-tools: Read, Grep, Glob, Bash, WebFetch, Write
 compatibility: "Requires nanobanana MCP server"
 metadata:
   author: AgriciDaniel
-  version: "1.6.1"
+  version: "1.7.0"
   category: seo
 ---
 

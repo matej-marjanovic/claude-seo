@@ -11,7 +11,7 @@ license: MIT
 allowed-tools: Read, Grep, Glob, Bash, WebFetch
 metadata:
   author: AgriciDaniel
-  version: "1.6.1"
+  version: "1.7.0"
   category: seo
 ---
 
@@ -159,6 +159,10 @@ Google updated its JavaScript SEO documentation in December 2025 with critical c
 ## DataForSEO Integration (Optional)
 
 If DataForSEO MCP tools are available, use `on_page_instant_pages` for real page analysis (status codes, page timing, broken links, on-page checks), `on_page_lighthouse` for Lighthouse audits (performance, accessibility, SEO scores), and `domain_analytics_technologies_domain_technologies` for technology stack detection.
+
+## Google API Integration (Optional)
+
+If Google API credentials are configured, use `python scripts/pagespeed_check.py <url> --json` for real PSI + CrUX field data (replaces lab-only CWV estimates), `python scripts/crux_history.py <url> --json` for 25-week CWV trends, and `python scripts/gsc_inspect.py <url> --json` for real indexation status per URL.
 
 ## Error Handling
 

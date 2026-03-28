@@ -2,8 +2,8 @@
 name: seo-audit
 description: >
   Full website SEO audit with parallel subagent delegation. Crawls up to 500
-  pages, detects business type, delegates to 9 specialists (7 core + 2
-  conditional local), generates health score. Use when user says "audit",
+  pages, detects business type, delegates to 10 specialists (7 core + 3
+  conditional), generates health score. Use when user says "audit",
   "full SEO check", "analyze my site", or "website health check".
 user-invokable: true
 argument-hint: "[url]"
@@ -11,7 +11,7 @@ license: MIT
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, Agent
 metadata:
   author: AgriciDaniel
-  version: "1.6.1"
+  version: "1.7.0"
   category: seo
 ---
 
@@ -32,6 +32,7 @@ metadata:
    - `seo-geo` -- AI crawler access, llms.txt, citability, brand mention signals
    - `seo-local` -- GBP signals, NAP consistency, reviews, local schema, industry-specific local factors (spawn when Local Service industry detected: brick-and-mortar, SAB, or hybrid business type)
    - `seo-maps` -- Geo-grid rank tracking, GBP audit, review intelligence, competitor radius mapping (spawn when Local Service detected AND DataForSEO MCP available)
+   - `seo-google` -- CWV field data (CrUX), URL indexation (GSC), organic traffic (GA4) (spawn when Google API credentials detected via `python scripts/google_auth.py --check`)
 5. **Score** -- aggregate into SEO Health Score (0-100)
 6. **Report** -- generate prioritized action plan
 
@@ -51,6 +52,7 @@ Delay between requests: 1 second
 - `FULL-AUDIT-REPORT.md`: Comprehensive findings
 - `ACTION-PLAN.md`: Prioritized recommendations (Critical > High > Medium > Low)
 - `screenshots/`: Desktop + mobile captures (if Playwright available)
+- **PDF Report** (recommended): Generate a professional A4 PDF using `scripts/google_report.py --type full`. This produces a white-cover enterprise report with TOC, executive summary, charts (Lighthouse gauges, query bars, index donut), metric cards, threshold tables, prioritized recommendations with effort estimates, and implementation roadmap. Always offer PDF generation after completing an audit.
 
 ## Scoring Weights
 
@@ -120,6 +122,10 @@ Delay between requests: 1 second
 ## DataForSEO Integration (Optional)
 
 If DataForSEO MCP tools are available, spawn the `seo-dataforseo` agent alongside existing subagents to enrich the audit with live data: real SERP positions, backlink profiles with spam scores, on-page analysis (Lighthouse), business listings, and AI visibility checks (ChatGPT scraper, LLM mentions).
+
+## Google API Integration (Optional)
+
+If Google API credentials are configured (`python scripts/google_auth.py --check`), spawn the `seo-google` agent to enrich the audit with real Google field data: CrUX Core Web Vitals (replaces lab-only estimates), GSC URL indexation status, search performance (clicks, impressions, CTR), and GA4 organic traffic trends. The Performance (CWV) category score benefits most from field data.
 
 ## Error Handling
 

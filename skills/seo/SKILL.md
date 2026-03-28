@@ -18,7 +18,7 @@ license: MIT
 allowed-tools: Read, Grep, Glob, Bash, WebFetch, Agent
 metadata:
   author: AgriciDaniel
-  version: "1.6.1"
+  version: "1.7.0"
   category: seo
 ---
 
@@ -29,7 +29,7 @@ metadata:
 **Scripts:** Located at the plugin root `scripts/` directory.
 
 Comprehensive SEO analysis across all industries (SaaS, local services,
-e-commerce, publishers, agencies). Orchestrates 14 specialized sub-skills and 9 subagents
+e-commerce, publishers, agencies). Orchestrates 15 specialized sub-skills and 10 subagents
 (+ 2 optional extension sub-skills: seo-dataforseo and seo-image-gen).
 
 ## Quick Reference
@@ -50,6 +50,7 @@ e-commerce, publishers, agencies). Orchestrates 14 specialized sub-skills and 9 
 | `/seo local <url>` | Local SEO analysis (GBP, citations, reviews, map pack) |
 | `/seo maps [command] [args]` | Maps intelligence (geo-grid, GBP audit, reviews, competitors) |
 | `/seo hreflang [url]` | Hreflang/i18n SEO audit and generation |
+| `/seo google [command] [url]` | Google SEO APIs (GSC, PageSpeed, CrUX, Indexing, GA4) |
 | `/seo dataforseo [command]` | Live SEO data via DataForSEO (extension) |
 | `/seo image-gen [use-case] <description>` | AI image generation for SEO assets (extension) |
 
@@ -58,12 +59,15 @@ e-commerce, publishers, agencies). Orchestrates 14 specialized sub-skills and 9 
 When the user invokes `/seo audit`, delegate to subagents in parallel:
 1. Detect business type (SaaS, local, ecommerce, publisher, agency, other)
 2. Spawn subagents: seo-technical, seo-content, seo-schema, seo-sitemap, seo-performance, seo-visual, seo-geo
-3. If local business detected, also spawn seo-local agent
-4. If local business detected AND DataForSEO MCP available, also spawn seo-maps agent
-5. Collect results and generate unified report with SEO Health Score (0-100)
-6. Create prioritized action plan (Critical -> High -> Medium -> Low)
+3. If Google API credentials detected (`python scripts/google_auth.py --check`), also spawn seo-google agent
+4. If local business detected, also spawn seo-local agent
+5. If local business detected AND DataForSEO MCP available, also spawn seo-maps agent
+6. Collect results and generate unified report with SEO Health Score (0-100)
+7. Create prioritized action plan (Critical -> High -> Medium -> Low)
+8. **Offer PDF report**: "Generate a professional PDF report? Use `/seo google report full`"
 
 For individual commands, load the relevant sub-skill directly.
+After any analysis command completes, offer to generate a PDF report via `scripts/google_report.py`.
 
 ## Industry Detection
 
@@ -120,7 +124,7 @@ Weighted aggregate of all categories:
 
 ## Sub-Skills
 
-This skill orchestrates 14 specialized sub-skills (+ 2 extensions):
+This skill orchestrates 15 specialized sub-skills (+ 2 extensions):
 
 1. **seo-audit** -- Full website audit with parallel delegation
 2. **seo-page** -- Deep single-page analysis
@@ -136,8 +140,9 @@ This skill orchestrates 14 specialized sub-skills (+ 2 extensions):
 12. **seo-hreflang** -- Hreflang/i18n SEO audit and generation
 13. **seo-local** -- Local SEO (GBP, NAP, citations, reviews, local schema, multi-location)
 14. **seo-maps** -- Maps intelligence (geo-grid, GBP audit, reviews, competitor radius)
-15. **seo-dataforseo** -- Live SEO data via DataForSEO MCP (extension)
-16. **seo-image-gen** -- AI image generation for SEO assets via Gemini (extension)
+15. **seo-google** -- Google SEO APIs (GSC, PageSpeed, CrUX, Indexing API, GA4)
+16. **seo-dataforseo** -- Live SEO data via DataForSEO MCP (extension)
+17. **seo-image-gen** -- AI image generation for SEO assets via Gemini (extension)
 
 ## Subagents
 
@@ -151,6 +156,7 @@ For parallel analysis during audits:
 - `seo-geo` -- AI crawler access, llms.txt, citability, brand mention signals
 - `seo-local` -- GBP signals, NAP consistency, reviews, local schema, industry-specific local factors (conditional: spawned when Local Service detected)
 - `seo-maps` -- Geo-grid rank tracking, GBP audit, review intelligence, competitor radius mapping (conditional: spawned when Local Service detected AND DataForSEO MCP available)
+- `seo-google` -- CWV field data, URL indexation status, organic traffic trends (conditional: spawned when Google API credentials detected)
 - `seo-dataforseo` -- Live SERP, keyword, backlink, local SEO data (extension, optional)
 - `seo-image-gen` -- SEO image audit and generation plan (extension, optional)
 

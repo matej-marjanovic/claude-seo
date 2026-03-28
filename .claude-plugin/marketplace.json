@@ -16,9 +16,9 @@
       "homepage": "https://github.com/AgriciDaniel/claude-seo",
       "repository": "https://github.com/AgriciDaniel/claude-seo",
       "license": "MIT",
-      "keywords": ["seo", "technical-seo", "e-e-a-t", "schema-markup", "local-seo", "geo", "ai-search"],
+      "keywords": ["seo", "technical-seo", "e-e-a-t", "schema-markup", "local-seo", "geo", "ai-search", "google-api", "search-console", "pagespeed", "crux"],
       "category": "seo",
-      "tags": ["seo", "audit", "technical", "content", "schema", "local", "geo"]
+      "tags": ["seo", "audit", "technical", "content", "schema", "local", "geo", "google-api"]
     }
   ]
 }
