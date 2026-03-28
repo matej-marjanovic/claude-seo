@@ -1,0 +1,2 @@
+Analyze this repo and generate a set of example commands/prompts that demonstrate all major capabilities of claude-seo.
+Target these examples toward entrepreneurs and SMBs by using relevant, real-world websites, products, or people (e.g., eightsleep.com). Strictly avoid mega-corporations like apple.com.
