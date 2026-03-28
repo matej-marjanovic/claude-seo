@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [Unreleased]
+
+### Added
+- **Cursor / Cursor Cloud compatibility**: `AGENTS.md` now provides full project instructions for Cursor and Cursor Cloud agents, mirroring the project context from `CLAUDE.md` (architecture, commands, development rules, key principles, ecosystem)
+- **DataForSEO extension docs for Cursor**: `AGENTS.md` documents how to call the DataForSEO REST API directly from Cursor environments (without MCP), with Python examples, module reference table, and verified subscription availability
+- **README Cursor section**: Added "Cursor / Cursor Cloud" section with setup instructions, script usage examples, and guidance on using skills/agents as `@context`
+- **Cursor Compatible badge**: Added to README alongside existing Claude Code badge
+
 ## [1.6.1] - 2026-03-27
 
 ### Added
