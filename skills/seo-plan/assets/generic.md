@@ -142,3 +142,25 @@ Adjust this template based on:
 - [ ] Structure content with clear headings, definitions, and step-by-step formats
 - [ ] Consider adding an `llms.txt` file at site root (emerging convention for AI crawlers: Google treats it as a regular text file)
 - [ ] Monitor AI citation across Google AI Overviews, ChatGPT, Perplexity, and Bing Copilot
+
+## Social Signal Strategy
+
+Social signals are not direct ranking factors but serve as content strategy inputs:
+
+### Reddit Presence
+- [ ] Identify 5-10 relevant subreddits for your niche
+- [ ] Use `/seo social reddit <keyword>` to discover trending discussions and content gaps
+- [ ] Create content that answers unanswered Reddit questions (high-intent signal)
+- [ ] Participate genuinely in discussions (follow subreddit rules — no spam)
+- [ ] Reddit is indexed by ChatGPT and Perplexity — social presence improves AI citability
+
+### Pinterest Visual Content
+- [ ] Use `/seo social pinterest <keyword>` to identify visual trends in your niche
+- [ ] Create pin-worthy images: infographics, step-by-step guides, data visualizations
+- [ ] Set up Rich Pins (requires Product/Article/Recipe schema on your site)
+- [ ] Pinterest drives long-tail traffic — pins have a 6-12 month engagement lifecycle
+
+### Content Calendar Integration
+- [ ] Source 2-3 content ideas monthly from Reddit opportunity analysis
+- [ ] Create 1-2 visual assets monthly informed by Pinterest trend data
+- [ ] Track social engagement using `/seo social aggregate <url>` to measure impact

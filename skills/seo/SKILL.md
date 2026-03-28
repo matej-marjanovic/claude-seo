@@ -52,6 +52,9 @@ e-commerce, publishers, agencies). Orchestrates 15 specialized sub-skills and 10
 | `/seo hreflang [url]` | Hreflang/i18n SEO audit and generation |
 | `/seo google [command] [url]` | Google SEO APIs (GSC, PageSpeed, CrUX, Indexing, GA4) |
 | `/seo dataforseo [command]` | Live SEO data via DataForSEO (extension) |
+| `/seo ecommerce [command] <keyword>` | E-commerce marketplace intelligence (extension) |
+| `/seo aso [command] <keyword\|app_id>` | App Store Optimization (extension) |
+| `/seo social [command] <keyword\|url>` | Social signal analysis — Reddit, Pinterest (extension) |
 | `/seo image-gen [use-case] <description>` | AI image generation for SEO assets (extension) |
 
 ## Orchestration Logic
@@ -74,9 +77,10 @@ After any analysis command completes, offer to generate a PDF report via `script
 Detect business type from homepage signals:
 - **SaaS**: pricing page, /features, /integrations, /docs, "free trial", "sign up"
 - **Local Service**: phone number, address, service area, "serving [city]", Google Maps embed --> auto-suggest `/seo local` for deeper analysis
-- **E-commerce**: /products, /collections, /cart, "add to cart", product schema
+- **E-commerce**: /products, /collections, /cart, "add to cart", product schema --> auto-suggest `/seo ecommerce` if DataForSEO Merchant available
 - **Publisher**: /blog, /articles, /topics, article schema, author pages, publication dates
 - **Agency**: /case-studies, /portfolio, /industries, "our work", client logos
+- **App/Mobile**: /app, app store links, google play, "download", mobile app, app_id --> auto-suggest `/seo aso` if DataForSEO App Data available
 
 ## Quality Gates
 
@@ -146,6 +150,9 @@ This skill orchestrates 15 specialized sub-skills (+ 2 extensions):
 15. **seo-google** -- Google SEO APIs (GSC, PageSpeed, CrUX, Indexing API, GA4)
 16. **seo-dataforseo** -- Live SEO data via DataForSEO MCP (extension)
 17. **seo-image-gen** -- AI image generation for SEO assets via Gemini (extension)
+18. **seo-ecommerce** -- E-commerce marketplace intelligence via Merchant API (extension)
+19. **seo-aso** -- App Store Optimization via App Data API (extension)
+20. **seo-social-signals** -- Social signal analysis via Social Media API (extension)
 
 ## Subagents
 
@@ -162,6 +169,8 @@ For parallel analysis during audits:
 - `seo-google` -- CWV field data, URL indexation status, organic traffic trends (conditional: spawned when Google API credentials detected)
 - `seo-dataforseo` -- Live SERP, keyword, backlink, local SEO data (extension, optional)
 - `seo-image-gen` -- SEO image audit and generation plan (extension, optional)
+- `seo-ecommerce` -- E-commerce marketplace intelligence (conditional: spawned when E-commerce detected AND DataForSEO Merchant available)
+- `seo-aso` -- App Store Optimization (conditional: spawned when App/Mobile detected AND DataForSEO App Data available)
 
 ## Error Handling
 

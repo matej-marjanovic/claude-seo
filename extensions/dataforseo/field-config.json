@@ -276,5 +276,155 @@
       "timestamp": true,
       "metrics": true
     }
+  },
+  "merchant": {
+    "products": {
+      "rank_group": true,
+      "rank_absolute": true,
+      "title": true,
+      "price": true,
+      "currency": true,
+      "url": true,
+      "domain": true,
+      "description": true,
+      "rating": true,
+      "reviews_count": true,
+      "seller": true,
+      "marketplace": true,
+      "product_id": true,
+      "data_docid": true
+    },
+    "sellers": {
+      "title": true,
+      "seller_name": true,
+      "price": true,
+      "currency": true,
+      "url": true,
+      "condition": true,
+      "delivery_info": true,
+      "rating": true
+    },
+    "product_specs": {
+      "name": true,
+      "value": true,
+      "category": true
+    },
+    "product_reviews": {
+      "rating": true,
+      "review_text": true,
+      "timestamp": true,
+      "author": true,
+      "title": true,
+      "url": true,
+      "helpful_count": true
+    }
+  },
+  "app_data": {
+    "app_search": {
+      "rank_group": true,
+      "title": true,
+      "app_id": true,
+      "url": true,
+      "icon": true,
+      "developer": true,
+      "rating": true,
+      "reviews_count": true,
+      "installs": true,
+      "price": true,
+      "category": true
+    },
+    "app_list": {
+      "title": true,
+      "app_id": true,
+      "url": true,
+      "developer": true,
+      "rating": true,
+      "reviews_count": true,
+      "installs": true,
+      "price": true,
+      "category": true,
+      "position": true
+    },
+    "app_info": {
+      "title": true,
+      "app_id": true,
+      "url": true,
+      "description": true,
+      "developer": true,
+      "rating": true,
+      "reviews_count": true,
+      "installs": true,
+      "price": true,
+      "category": true,
+      "version": true,
+      "last_update_date": true,
+      "content_rating": true,
+      "minimum_os_version": true,
+      "size": true,
+      "screenshots": true
+    },
+    "app_reviews": {
+      "rating": true,
+      "review_text": true,
+      "timestamp": true,
+      "author": true,
+      "title": true,
+      "helpful_count": true,
+      "version": true
+    }
+  },
+  "social_media": {
+    "pinterest": {
+      "url": true,
+      "pinterest_pins": true,
+      "repins_count": true
+    },
+    "reddit": {
+      "url": true,
+      "subreddit": true,
+      "title": true,
+      "score": true,
+      "comments_count": true,
+      "author": true,
+      "permalink": true,
+      "reddit_shares": true,
+      "members": true
+    },
+    "facebook": {
+      "url": true,
+      "facebook_shares": true,
+      "facebook_comments": true,
+      "facebook_likes": true
+    }
+  },
+  "reviews": {
+    "google": {
+      "rating": true,
+      "review_text": true,
+      "timestamp": true,
+      "profile_name": true,
+      "profile_url": true,
+      "owner_answer": true,
+      "owner_timestamp": true,
+      "review_url": true,
+      "original_review_url": true
+    },
+    "trustpilot": {
+      "rating": true,
+      "review_text": true,
+      "timestamp": true,
+      "profile_name": true,
+      "title": true,
+      "images": true,
+      "response": true
+    },
+    "tripadvisor": {
+      "rating": true,
+      "review_text": true,
+      "timestamp": true,
+      "profile_name": true,
+      "title": true,
+      "url": true
+    }
   }
 }

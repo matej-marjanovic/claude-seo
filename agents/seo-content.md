@@ -54,6 +54,14 @@ AI content is acceptable IF it demonstrates genuine E-E-A-T. Flag these markers 
 
 - For evaluating programmatically generated pages, defer to the `seo-programmatic` sub-skill.
 - For comparison page content standards, see `seo-competitor-pages`.
+- For full social signal analysis: `/seo social reddit <keyword>` or `/seo social pinterest <keyword>`
+
+## Social Signal Integration
+
+If DataForSEO Social Media API is available, check Reddit/Pinterest engagement for the page URL and related keywords:
+- Run `python3 scripts/dataforseo_social.py aggregate "<page_url>"` for social presence score
+- Run `python3 scripts/dataforseo_social.py reddit-opportunities "<keyword>"` for content gap discovery
+- Include social signal insights as optional dimension in output
 
 ## Output Format
 
@@ -61,4 +69,5 @@ Provide:
 - Content quality score (0-100)
 - E-E-A-T breakdown with scores per factor
 - AI citation readiness score
+- Social presence score (optional, if DataForSEO available)
 - Specific improvement recommendations

@@ -37,9 +37,13 @@ DEFAULT_CONFIG = {
         "review_depth": 20,
         "content_limit": 10,
         "grid_size": 5,
+        "merchant_limit": 20,
+        "app_limit": 20,
+        "social_pages": 5,
+        "review_limit": 40,
     },
     "session_budget_usd": None,
-    "warn_modules": ["BACKLINKS", "AI_OPTIMIZATION"],
+    "warn_modules": ["BACKLINKS", "AI_OPTIMIZATION", "MERCHANT", "APP_DATA"],
 }
 
 # Per-task base costs in USD (live mode unless noted)
@@ -117,6 +121,46 @@ PRICING = {
     "ai_chatgpt_scraper_live": 0.004,
     "ai_chatgpt_scraper_standard": 0.0012,
     "ai_keyword_data": 0.01,  # + $0.0001/keyword
+    # Merchant API (Google Shopping)
+    "merchant_google_products_standard": 0.0024,
+    "merchant_google_products_live": 0.003,
+    "merchant_google_sellers_standard": 0.0024,
+    "merchant_google_sellers_live": 0.003,
+    "merchant_google_specs_standard": 0.0024,
+    "merchant_google_specs_live": 0.003,
+    "merchant_google_reviews_standard": 0.0024,
+    "merchant_google_reviews_live": 0.003,
+    # Merchant API (Amazon)
+    "merchant_amazon_products_standard": 0.0024,
+    "merchant_amazon_products_live": 0.003,
+    "merchant_amazon_sellers_standard": 0.0024,
+    "merchant_amazon_sellers_live": 0.003,
+    "merchant_amazon_reviews_standard": 0.0024,
+    "merchant_amazon_reviews_live": 0.003,
+    # App Data API
+    "appdata_google_search_standard": 0.001,
+    "appdata_google_search_live": 0.002,
+    "appdata_google_list_standard": 0.001,
+    "appdata_google_list_live": 0.002,
+    "appdata_google_info_live": 0.002,
+    "appdata_google_reviews_standard": 0.001,
+    "appdata_google_reviews_live": 0.002,
+    "appdata_apple_search_standard": 0.001,
+    "appdata_apple_search_live": 0.002,
+    "appdata_apple_list_standard": 0.001,
+    "appdata_apple_list_live": 0.002,
+    "appdata_apple_info_live": 0.002,
+    "appdata_apple_reviews_standard": 0.001,
+    "appdata_apple_reviews_live": 0.002,
+    # Social Media API (under Business Data)
+    "social_pinterest_live": 0.002,  # per URL (up to 10)
+    "social_reddit_live": 0.002,  # per URL (up to 10)
+    "social_facebook_live": 0.002,  # per URL (up to 10)
+    # Reviews API (under Business Data — explicit review endpoints)
+    "reviews_google_placeid": 0.00075,  # per 20 reviews
+    "reviews_google_keyword": 0.003,  # per 10 reviews
+    "reviews_trustpilot": 0.00075,  # per 20 reviews
+    "reviews_tripadvisor": 0.00075,  # per 10 reviews
 }
 
 # Per-row costs for endpoints that charge by row
@@ -128,6 +172,10 @@ ROW_COSTS = {
     "labs_per_target": 0.0001,
     "kw_per_keyword": 0.0001,
     "business_listings_per_item": 0.0003,
+    "merchant_per_product": 0.0003,
+    "appdata_per_app": 0.0001,
+    "reviews_per_batch": 0.00075,
+    "social_per_url": 0.002,
 }
 
 # Maps command names to (list of pricing keys, row_cost_key, default_rows)
@@ -290,6 +338,102 @@ COMMAND_ESTIMATES = {
         "standard_calls": [("serp_maps_standard", 1)],
         "rows_param": "grid_points",
         "module": "SERP",
+    },
+    # Merchant API commands
+    "merchant-products": {
+        "calls": [("merchant_google_products_live", 1)],
+        "standard_calls": [("merchant_google_products_standard", 1)],
+        "row_cost_key": "merchant_per_product",
+        "rows_param": "limit",
+        "module": "MERCHANT",
+    },
+    "merchant-sellers": {
+        "calls": [("merchant_google_sellers_live", 1)],
+        "standard_calls": [("merchant_google_sellers_standard", 1)],
+        "module": "MERCHANT",
+    },
+    "merchant-specs": {
+        "calls": [("merchant_google_specs_live", 1)],
+        "standard_calls": [("merchant_google_specs_standard", 1)],
+        "module": "MERCHANT",
+    },
+    "merchant-reviews": {
+        "calls": [("merchant_google_reviews_live", 1)],
+        "standard_calls": [("merchant_google_reviews_standard", 1)],
+        "module": "MERCHANT",
+    },
+    "amazon-products": {
+        "calls": [("merchant_amazon_products_live", 1)],
+        "standard_calls": [("merchant_amazon_products_standard", 1)],
+        "row_cost_key": "merchant_per_product",
+        "rows_param": "limit",
+        "module": "MERCHANT",
+    },
+    "amazon-sellers": {
+        "calls": [("merchant_amazon_sellers_live", 1)],
+        "standard_calls": [("merchant_amazon_sellers_standard", 1)],
+        "module": "MERCHANT",
+    },
+    "amazon-reviews": {
+        "calls": [("merchant_amazon_reviews_live", 1)],
+        "standard_calls": [("merchant_amazon_reviews_standard", 1)],
+        "module": "MERCHANT",
+    },
+    # App Data API commands
+    "app-search": {
+        "calls": [("appdata_google_search_live", 1)],
+        "standard_calls": [("appdata_google_search_standard", 1)],
+        "row_cost_key": "appdata_per_app",
+        "rows_param": "limit",
+        "module": "APP_DATA",
+    },
+    "app-list": {
+        "calls": [("appdata_google_list_live", 1)],
+        "standard_calls": [("appdata_google_list_standard", 1)],
+        "module": "APP_DATA",
+    },
+    "app-info": {
+        "calls": [("appdata_google_info_live", 1)],
+        "module": "APP_DATA",
+    },
+    "app-reviews": {
+        "calls": [("appdata_google_reviews_live", 1)],
+        "standard_calls": [("appdata_google_reviews_standard", 1)],
+        "row_cost_key": "reviews_per_batch",
+        "rows_param": "limit",
+        "module": "APP_DATA",
+    },
+    # Social Media commands
+    "social-pinterest": {
+        "calls": [("social_pinterest_live", 1)],
+        "row_cost_key": "social_per_url",
+        "rows_param": "limit",
+        "module": "BUSINESS_DATA",
+    },
+    "social-reddit": {
+        "calls": [("social_reddit_live", 1)],
+        "row_cost_key": "social_per_url",
+        "rows_param": "limit",
+        "module": "BUSINESS_DATA",
+    },
+    # Reviews commands
+    "reviews-google": {
+        "calls": [("reviews_google_placeid", 1)],
+        "row_cost_key": "reviews_per_batch",
+        "rows_param": "limit",
+        "module": "BUSINESS_DATA",
+    },
+    "reviews-trustpilot": {
+        "calls": [("reviews_trustpilot", 1)],
+        "row_cost_key": "reviews_per_batch",
+        "rows_param": "limit",
+        "module": "BUSINESS_DATA",
+    },
+    "reviews-tripadvisor": {
+        "calls": [("reviews_tripadvisor", 1)],
+        "row_cost_key": "reviews_per_batch",
+        "rows_param": "limit",
+        "module": "BUSINESS_DATA",
     },
 }
 

@@ -123,6 +123,13 @@ Review velocity matters more than total count. The **18-day rule** (Sterling Sky
 - Partial: Some reviews but gaps in recency, rating, or response rate
 - Low: <10 reviews, no recent activity, no responses, single platform only
 
+**DataForSEO Reviews API Integration (if available):**
+- Fetch live cross-platform reviews: `python3 scripts/dataforseo_reviews.py fetch <business> --platform all`
+- Calculate review velocity and 18-day rule compliance: `python3 scripts/dataforseo_reviews.py velocity <business>`
+- Generate LLM-ready sentiment data: `python3 scripts/dataforseo_reviews.py sentiment <business>`
+- Cross-platform comparison table: `python3 scripts/dataforseo_reviews.py compare <business>`
+- Correlate review sentiment with ranking changes over time
+
 ### 3. Local On-Page SEO (20%)
 
 Dedicated service pages = **#1 local organic factor AND #2 AI visibility factor** (Whitespark 2026).

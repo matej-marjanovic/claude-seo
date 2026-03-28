@@ -117,6 +117,17 @@ scripts/dataforseo_costs.py today      # Today's spending vs budget
 | `/seo dataforseo listings <keyword>` | Business listings search |
 | `/seo dataforseo ai-scrape <query>` | ChatGPT web scraper for GEO |
 | `/seo dataforseo ai-mentions <keyword>` | LLM mention tracking for GEO |
+| `/seo dataforseo merchant-products <keyword>` | Google Shopping product search |
+| `/seo dataforseo merchant-sellers <product_id>` | Google Shopping seller comparison |
+| `/seo dataforseo amazon-products <keyword>` | Amazon product search |
+| `/seo dataforseo app-search <keyword>` | App Store / Google Play search |
+| `/seo dataforseo app-info <app_id>` | App metadata and details |
+| `/seo dataforseo app-reviews <app_id>` | App store reviews |
+| `/seo dataforseo social-pinterest <url>` | Pinterest engagement signals |
+| `/seo dataforseo social-reddit <url>` | Reddit shares and discussions |
+| `/seo dataforseo reviews-google <business>` | Google Reviews (cross-platform) |
+| `/seo dataforseo reviews-trustpilot <domain>` | Trustpilot reviews |
+| `/seo dataforseo reviews-tripadvisor <business>` | Tripadvisor reviews |
 
 ---
 
@@ -419,6 +430,10 @@ When DataForSEO MCP tools are available, other claude-seo skills can leverage li
 - **seo-page**:Use `serp_organic_live_advanced` for real SERP positions, `backlinks_summary` for link data
 - **seo-geo**:Use `ai_optimization_chat_gpt_scraper` for real ChatGPT visibility, `ai_opt_llm_ment_search` for LLM mention tracking
 - **seo-plan**:Use `dataforseo_labs_google_competitors_domain`, `dataforseo_labs_google_domain_intersection`, `dataforseo_labs_bulk_traffic_estimation` for real competitive intelligence
+- **seo-ecommerce**:Use `merchant/google/products` and `merchant/amazon/products` for marketplace visibility, `merchant/google/sellers` for price comparison
+- **seo-aso**:Use `app_data/google/app_searches`, `app_data/apple/app_searches` for app keyword tracking, `app_data/*/app_info` for competitor analysis
+- **seo-social-signals**:Use `business_data/social_media/pinterest` for pin engagement, `business_data/social_media/reddit` for Reddit discussion signals
+- **seo-local** / **seo-maps**:Use `business_data/google/reviews`, `business_data/trustpilot/reviews`, `business_data/tripadvisor/reviews` for cross-platform review intelligence
 
 ## Error Handling
 

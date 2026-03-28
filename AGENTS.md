@@ -11,10 +11,11 @@ consists of Markdown skill files, subagent definitions, Python helper scripts, J
 templates, and shell install scripts.
 
 The skill follows the Agent Skills open standard and a 3-layer architecture
-(directive → orchestration → execution): 14 core sub-skills (+ 2 extensions),
-9 core subagents (+ 2 extension agents), and an extensible reference system covering
+(directive → orchestration → execution): 14 core sub-skills (+ 5 extensions),
+9 core subagents (+ 4 extension agents), and an extensible reference system covering
 technical SEO, content quality, schema markup, image optimization, sitemap architecture,
-AI search optimization, local SEO, and maps intelligence.
+AI search optimization, local SEO, maps intelligence, e-commerce marketplace intelligence,
+App Store Optimization, social signal analysis, and cross-platform review intelligence.
 
 ## Architecture
 
@@ -26,7 +27,7 @@ claude-seo/
   .claude-plugin/
     plugin.json                    # Plugin manifest (v1.6.1)
     marketplace.json               # Marketplace catalog for distribution
-  skills/                          # 17 skills (auto-discovered by Claude Code)
+  skills/                          # 20 skills (auto-discovered by Claude Code)
     seo/                           # Main orchestrator skill
       SKILL.md                     # Entry point, routing table, core rules
       references/                  # On-demand knowledge files (10 files)
@@ -50,7 +51,14 @@ claude-seo/
     seo-image-gen/                 # AI image generation for SEO assets
       SKILL.md
       references/                  # Image gen reference files (7 files)
-  agents/                          # 11 subagents (auto-discovered by Claude Code)
+    seo-ecommerce/                 # E-commerce marketplace intelligence
+      SKILL.md
+      references/                  # Merchant API endpoint reference (1 file)
+    seo-aso/                       # App Store Optimization
+      SKILL.md
+      references/                  # ASO best practices reference (1 file)
+    seo-social-signals/SKILL.md    # Social signal analysis (Reddit, Pinterest)
+  agents/                          # 13 subagents (auto-discovered by Claude Code)
     seo-technical.md               # Crawlability, indexability, security
     seo-content.md                 # E-E-A-T, readability, thin content
     seo-schema.md                  # Structured data validation
@@ -62,6 +70,8 @@ claude-seo/
     seo-maps.md                    # Geo-grid, GBP audit, reviews, competitor radius
     seo-dataforseo.md              # DataForSEO data analyst
     seo-image-gen.md               # SEO image audit analyst
+    seo-ecommerce.md               # E-commerce marketplace intelligence
+    seo-aso.md                     # App Store Optimization
   hooks/                           # Quality gate hooks
     hooks.json                     # PostToolUse schema validation (Claude Code)
     validate-schema.py             # Schema.org JSON-LD validator
@@ -71,6 +81,10 @@ claude-seo/
     parse_html.py                  # Extract SEO-relevant elements from HTML
     capture_screenshot.py          # Capture page screenshots via Playwright
     analyze_visual.py              # Above-fold, mobile, typography analysis
+    dataforseo_normalize.py        # JSON-to-Markdown normalizer for DataForSEO
+    dataforseo_merchant.py         # Merchant API client (Google Shopping, Amazon)
+    dataforseo_reviews.py          # Reviews API client (Google, Trustpilot, Tripadvisor)
+    dataforseo_social.py           # Social Media API client (Pinterest, Reddit)
   schema/                          # Schema.org JSON-LD templates
   extensions/                      # Optional add-on install helpers
     dataforseo/                    # DataForSEO MCP install scripts
@@ -103,6 +117,9 @@ In Google Antigravity/Gemini, the same skills and agents are natively loaded sin
 | `/seo maps [command] [args]` | Maps intelligence (geo-grid, GBP audit) |
 | `/seo hreflang <url>` | International SEO / hreflang audit |
 | `/seo image-gen [use-case] <desc>` | AI image generation for SEO assets (extension) |
+| `/seo ecommerce [command] <keyword>` | E-commerce marketplace intelligence (extension) |
+| `/seo aso [command] <keyword\|app_id>` | App Store Optimization (extension) |
+| `/seo social [command] <keyword\|url>` | Social signal analysis — Reddit, Pinterest (extension) |
 
 ## Development Rules
 
@@ -119,9 +136,9 @@ In Google Antigravity/Gemini, the same skills and agents are natively loaded sin
 ## Key Principles
 
 1. **Progressive Disclosure**: Metadata always loaded, instructions on activation, resources on demand
-2. **Industry Detection**: Auto-detect SaaS, e-commerce, local, publisher, agency
-3. **Parallel Execution**: Full audits spawn up to 11 subagents simultaneously
-4. **Extension System**: DataForSEO MCP for live data, Banana MCP for AI image generation
+2. **Industry Detection**: Auto-detect SaaS, e-commerce, local, publisher, agency, app/mobile
+3. **Parallel Execution**: Full audits spawn up to 13 subagents simultaneously
+4. **Extension System**: DataForSEO MCP for live data (SERP, Merchant, App Data, Social, Reviews), Banana MCP for AI image generation
 
 ## Ecosystem
 
@@ -160,6 +177,13 @@ python3 -m playwright install --with-deps chromium   # optional
 | DataForSEO cost init | `python3 scripts/dataforseo_costs.py init` |
 | DataForSEO cost check | `python3 scripts/dataforseo_costs.py check --command <cmd>` |
 | DataForSEO cost summary | `python3 scripts/dataforseo_costs.py summary` |
+| Merchant products | `python3 scripts/dataforseo_merchant.py products <keyword>` |
+| Merchant sellers | `python3 scripts/dataforseo_merchant.py sellers <product_id>` |
+| Reviews fetch | `python3 scripts/dataforseo_reviews.py fetch <business> --platform all` |
+| Review velocity | `python3 scripts/dataforseo_reviews.py velocity <business>` |
+| Social signals | `python3 scripts/dataforseo_social.py signals <url>` |
+| Reddit opportunities | `python3 scripts/dataforseo_social.py reddit-opportunities <keyword>` |
+| Normalize API output | `python3 scripts/dataforseo_normalize.py --module merchant --input resp.json` |
 
 See `CONTRIBUTING.md` for full code style guidelines and PR process.
 
@@ -219,6 +243,12 @@ for the full command reference. Key endpoints:
 | On-Page | `on_page/instant_pages` | Lighthouse + content parsing |
 | Content | `content_analysis/search/live` | Content quality analysis |
 | AI Optimization | `ai_optimization/chat_gpt_scraper/live` | GEO / AI visibility |
+| Merchant | `merchant/google/products/task_post` | Google Shopping product data |
+| Merchant | `merchant/amazon/products/task_post` | Amazon product data |
+| App Data | `app_data/google/app_searches/task_post` | Google Play app search |
+| App Data | `app_data/apple/app_searches/task_post` | Apple App Store search |
+| Social Media | `business_data/social_media/pinterest/live` | Pinterest engagement |
+| Social Media | `business_data/social_media/reddit/live` | Reddit shares/discussions |
 
 ### How DataForSEO enhances core analysis
 
@@ -242,9 +272,11 @@ Not all modules are available on every DataForSEO plan:
 | ON-PAGE (Lighthouse) | ✅ Included in standard plans |
 | DOMAIN_ANALYTICS | ✅ Included in standard plans |
 | CONTENT_ANALYSIS | ✅ Included in standard plans |
-| BUSINESS_DATA | ✅ Included in standard plans |
+| BUSINESS_DATA (incl. Social Media, Reviews) | ✅ Included in standard plans |
 | BACKLINKS | ❌ Requires separate subscription activation |
 | AI_OPTIMIZATION | ❌ Dedicated endpoints (ChatGPT scraper, LLM mentions) require separate module activation |
+| MERCHANT (Google Shopping, Amazon) | ❌ Requires separate module activation |
+| APP_DATA (Google Play, Apple App Store) | ❌ Requires separate module activation |
 
 AI Overview data is available through the standard SERP module (returned as an
 `ai_overview` item type alongside organic results).
@@ -280,9 +312,9 @@ python3 scripts/dataforseo_costs.py today
 ```
 
 **Default behavior:** `threshold` mode at `$0.50`. Cheap calls proceed automatically;
-expensive operations require user confirmation. BACKLINKS and AI_OPTIMIZATION modules
-always require confirmation. Conservative limits (standard queue, reduced depth/rows)
-cut costs by ~60-80%.
+expensive operations require user confirmation. BACKLINKS, AI_OPTIMIZATION, MERCHANT,
+and APP_DATA modules always require confirmation. Conservative limits (standard queue,
+reduced depth/rows) cut costs by ~60-80%.
 
 ### Other notes
 

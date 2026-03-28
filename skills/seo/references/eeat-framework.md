@@ -212,3 +212,29 @@ The December 2025 update elevated the "Experience" dimension as a key differenti
 1. Continue publishing high-quality content
 2. Monitor and respond to reputation issues
 3. Keep credentials and certifications current
+
+---
+
+## Review Signal Correlation with E-E-A-T
+
+Third-party reviews are not a direct Google ranking factor but strongly correlate
+with user trust signals that influence rankings. When DataForSEO Reviews API is
+available, use review data to enrich E-E-A-T assessment:
+
+### Review Metrics as E-E-A-T Proxies
+
+| E-E-A-T Dimension | Review Signal | How to Measure |
+|---|---|---|
+| **Trustworthiness** | Review velocity + consistency | `scripts/dataforseo_reviews.py velocity <business>` — 18-day rule compliance |
+| **Trustworthiness** | Owner response rate | Cross-platform response rate from `scripts/dataforseo_reviews.py compare` |
+| **Authoritativeness** | Positive sentiment rate | LLM analysis of `scripts/dataforseo_reviews.py sentiment <business>` output |
+| **Experience** | Specific experience mentions | Keyword extraction from review text (look for "I used", "my experience") |
+| **Expertise** | Review specificity | Reviews mentioning technical details indicate expert-level service |
+
+### Integration Notes
+
+- Review data **enriches** E-E-A-T assessment but should not override other signals
+- Negative review sentiment ≠ poor E-E-A-T (could indicate authentic user feedback)
+- Cross-platform **consistency** matters more than any single platform's rating
+- Use `scripts/dataforseo_reviews.py sentiment` (LLM analysis, no API cost) for sentiment scoring
+

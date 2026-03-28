@@ -168,6 +168,17 @@ GEO is the emerging discipline of optimizing content specifically for AI-generat
 
 If DataForSEO MCP tools are available, use `kw_data_google_ads_search_volume` for real keyword volume data, `dataforseo_labs_bulk_keyword_difficulty` for difficulty scores, `dataforseo_labs_search_intent` for intent classification, and `content_analysis_summary` for content quality analysis.
 
+## Social Signal Enrichment (Optional)
+
+If DataForSEO Social Media API is available, enrich content analysis with social data:
+
+- **Reddit content gaps:** `python3 scripts/dataforseo_social.py reddit-opportunities "<keyword>"` discovers trending discussions, unanswered questions, and "looking for" threads that indicate underserved content demand
+- **Pinterest visual trends:** `python3 scripts/dataforseo_social.py pinterest-trends "<keyword>"` identifies visual content formats that drive engagement — feed into image optimization
+- **Social presence check:** `python3 scripts/dataforseo_social.py aggregate "<page_url>"` measures the page's social footprint across Reddit and Pinterest
+- Reddit and Pinterest are indexed by AI systems — strong social presence correlates with higher AI citation rates (relevant to AI Citation Readiness score)
+
+For full social signal analysis, use `/seo social reddit <keyword>` or `/seo social pinterest <keyword>`.
+
 ## Error Handling
 
 | Scenario | Action |

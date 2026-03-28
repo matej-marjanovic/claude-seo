@@ -165,3 +165,31 @@ AI search platforms increasingly answer product queries directly. Optimize for A
 - [ ] Maintain consistent product entity data across all platforms (site, Amazon, Merchant Center)
 - [ ] Structure comparison content with clear feature tables AI can parse
 - [ ] Add detailed FAQ content for common product questions
+
+## Marketplace Intelligence (DataForSEO Merchant API)
+
+When DataForSEO Merchant API is available, enhance e-commerce strategy with live data:
+
+### Marketplace Keyword Gap Analysis
+- [ ] Run `/seo ecommerce keyword-gap <domain> <keywords>` to find products visible in organic
+  but missing from Google Shopping / Amazon
+- [ ] Prioritize Shopping feed optimization for high-volume, high-conversion keywords
+- [ ] Track cross-marketplace visibility monthly
+
+### Product Feed Optimization
+- [ ] Ensure Product schema feeds into Google Merchant Center free listings
+- [ ] Validate pricing accuracy: `scripts/dataforseo_merchant.py products` prices should match site
+- [ ] Monitor competitive pricing weekly with price competitiveness checks
+- [ ] Set up Amazon ASIN tracking for own products plus top 5 competitors
+
+### Competitive Pricing Intelligence
+- [ ] Use `/seo ecommerce price-check <product_id>` for top products
+- [ ] Track price percentile position over time
+- [ ] Set alerts for competitor price changes (manual workflow via scheduled scripts)
+- [ ] Analyze seller landscape for market concentration
+
+### Google Shopping Visibility
+- [ ] Submit product feeds to Merchant Center (requires Merchant Center account)
+- [ ] Ensure server-rendered Product schema for free listings eligibility
+- [ ] Monitor Shopping ranking for top 10 product keywords via Merchant API
+- [ ] Cross-reference: use `/seo dataforseo merchant-products <keyword>` for live data

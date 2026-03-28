@@ -157,6 +157,52 @@ All endpoints: $0.02/request + $0.00003/row (search, summary, phrase trends).
 | ChatGPT scraper | $0.004 live, $0.0012 standard |
 | AI keyword data | $0.01/task + $0.0001/keyword |
 
+### Merchant API (requires separate module activation)
+
+| Operation | Mode | Cost |
+|-----------|------|------|
+| Google Shopping Products | Standard | $0.0024/task |
+| Google Shopping Products | Live | $0.003/task + $0.0003/product |
+| Google Shopping Sellers | Standard | $0.0024/task |
+| Google Shopping Sellers | Live | $0.003/task |
+| Google Shopping Specs | Standard | $0.0024/task |
+| Google Shopping Reviews | Standard | $0.0024/task |
+| Amazon Products | Standard | $0.0024/task |
+| Amazon Products | Live | $0.003/task + $0.0003/product |
+| Amazon Sellers | Standard | $0.0024/task |
+| Amazon Reviews | Standard | $0.0024/task |
+
+### App Data API (requires separate module activation)
+
+| Operation | Mode | Cost |
+|-----------|------|------|
+| Google Play Search | Standard | $0.001/task |
+| Google Play Search | Live | $0.002/task + $0.0001/app |
+| Google Play App List | Standard | $0.001/task |
+| Google Play App Info | Live | $0.002/task |
+| Google Play Reviews | Standard | $0.001/task |
+| Apple App Store Search | Standard | $0.001/task |
+| Apple App Store Search | Live | $0.002/task + $0.0001/app |
+| Apple App Store Info | Live | $0.002/task |
+| Apple App Store Reviews | Standard | $0.001/task |
+
+### Social Media API (under Business Data)
+
+| Operation | Mode | Cost |
+|-----------|------|------|
+| Pinterest | Live | $0.002/URL (up to 10 URLs/request) |
+| Reddit | Live | $0.002/URL (up to 10 URLs/request) |
+| Facebook | Live | $0.002/URL (up to 10 URLs/request) |
+
+### Reviews API (under Business Data — dedicated review endpoints)
+
+| Operation | Mode | Cost |
+|-----------|------|------|
+| Google Reviews (place_id) | Standard | $0.00075/20 reviews |
+| Google Reviews (keyword) | Standard | $0.003/10 reviews |
+| Trustpilot Reviews | Standard | $0.00075/20 reviews |
+| Tripadvisor Reviews | Standard | $0.00075/10 reviews |
+
 ---
 
 ## Command Cost Estimates
@@ -165,14 +211,35 @@ Use `scripts/dataforseo_costs.py estimate --command <CMD>` for live calculations
 Key reference points (live mode):
 
 | Command | Est. Cost | Command | Est. Cost |
-|---------|-----------|---------|-----------|
+|---------|-----------|---------|-----------| 
 | `serp` | $0.002 | `backlinks` | ~$0.15 |
 | `keywords` | $0.225 | `ai-mentions` | ~$0.44 |
 | `volume` (20kw) | ~$0.003 | `content` | ~$0.065 |
 | `onpage` | ~$0.009 | `tech` / `whois` | ~$0.101 |
 | `ai-scrape` | $0.004 | `listings` | ~$0.013 |
+| `merchant-products` | ~$0.009 | `amazon-products` | ~$0.009 |
+| `merchant-sellers` | ~$0.003 | `reviews-google` | ~$0.031 |
+| `app-search` | ~$0.002 | `app-info` | ~$0.002 |
+| `social-reddit` | ~$0.012 | `social-pinterest` | ~$0.012 |
+| `reviews-trustpilot` | ~$0.031 | `reviews-tripadvisor` | ~$0.031 |
 
 Composite: Full audit $0.50–$1.50 | Geo-grid 7×7 live $0.098 | 5×5 standard $0.015
+
+## Module Subscription Notes
+
+| Module | Availability |
+|--------|-------------|
+| SERP (incl. AI Overview) | ✅ Included in standard plans |
+| KEYWORDS_DATA | ✅ Included in standard plans |
+| DATAFORSEO_LABS | ✅ Included in standard plans |
+| ON-PAGE (Lighthouse) | ✅ Included in standard plans |
+| DOMAIN_ANALYTICS | ✅ Included in standard plans |
+| CONTENT_ANALYSIS | ✅ Included in standard plans |
+| BUSINESS_DATA (incl. Social Media, Reviews) | ✅ Included in standard plans |
+| BACKLINKS | ❌ Requires separate subscription activation |
+| AI_OPTIMIZATION | ❌ Requires separate module activation |
+| MERCHANT (Google Shopping, Amazon) | ❌ Requires separate module activation |
+| APP_DATA (Google Play, Apple App Store) | ❌ Requires separate module activation |
 
 ## Conservative Defaults
 
@@ -183,6 +250,10 @@ Composite: Full audit $0.50–$1.50 | Geo-grid 7×7 live $0.098 | 5×5 standard 
 | Keyword limit | 50–100 | 20 |
 | Backlink rows | 100 | 50 |
 | Grid size | 7×7 | 5×5 |
+| Merchant rows | 50 | 20 |
+| App results | 50 | 20 |
+| Social URLs | 10 | 5 |
+| Review limit | 100 | 40 |
 
 Conservative defaults reduce costs by ~60–80% for most operations.
 
@@ -194,4 +265,4 @@ Conservative defaults reduce costs by ~60–80% for most operations.
 2. **Check approval mode:** read config, compare estimated cost to threshold
 3. **If approval needed:** display cost breakdown and wait for user confirmation
 4. **After calls complete:** log actual costs with `scripts/dataforseo_costs.py log`
-5. **Warn on expensive modules:** always flag BACKLINKS and AI_OPTIMIZATION regardless of mode
+5. **Warn on expensive modules:** always flag BACKLINKS, AI_OPTIMIZATION, MERCHANT, APP_DATA regardless of mode

@@ -130,13 +130,14 @@ Cross-platform review analysis: velocity, sentiment, rating distribution, fake d
 
 ### Workflow
 
-1. Fetch Google reviews via DataForSEO Reviews API (sort by newest)
-2. Calculate review velocity: reviews per month over last 6 months
+1. Fetch cross-platform reviews: `python3 scripts/dataforseo_reviews.py fetch <business> --platform all --limit 40`
+2. Calculate review velocity and 18-day rule: `python3 scripts/dataforseo_reviews.py velocity <business> --window 180`
 3. Check 18-day rule (Sterling Sky): any 3-week gap = ranking risk
 4. Analyze rating distribution: healthy = bell curve skewed to 5-star
-5. Calculate owner response rate: responses / total reviews
-6. Fetch Tripadvisor and Trustpilot reviews (if available)
-7. Cross-platform comparison table
+5. Run LLM sentiment analysis: `python3 scripts/dataforseo_reviews.py sentiment <business>` (outputs reviews formatted for LLM classification — no API cost)
+6. Calculate owner response rate: responses / total reviews
+7. Cross-platform comparison: `python3 scripts/dataforseo_reviews.py compare <business>`
+8. Generate **Review Sentiment Score** as sub-metric of Review Health dimension
 
 ### Fake Review Detection Signals
 

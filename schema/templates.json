@@ -208,6 +208,74 @@
           }
         }
       }
+    },
+    {
+      "type": "MobileApplication_iOS",
+      "description": "iOS App Store listing. Title max 30 chars, subtitle max 30 chars. Includes name, OS, category, rating, price, and download URL.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "[App Name — max 30 chars for iOS]",
+        "operatingSystem": "iOS",
+        "applicationCategory": "[Category]",
+        "applicationSubCategory": "[SubCategory]",
+        "description": "[App description — max 4000 chars]",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "[Rating]",
+          "ratingCount": "[Count]"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "[0 for free]",
+          "priceCurrency": "USD"
+        },
+        "downloadUrl": "[App Store URL]",
+        "softwareVersion": "[Version]",
+        "datePublished": "[ISO Date]",
+        "author": {
+          "@type": "Organization",
+          "name": "[Developer Name]"
+        },
+        "screenshot": "[Screenshot URL]"
+      }
+    },
+    {
+      "type": "MobileApplication_Android",
+      "description": "Google Play Store listing. Title max 50 chars, short desc max 80 chars. Includes name, OS, category, rating, installs, and developer.",
+      "template": {
+        "@context": "https://schema.org",
+        "@type": "MobileApplication",
+        "name": "[App Name — max 50 chars for Google Play]",
+        "operatingSystem": "Android",
+        "applicationCategory": "[Category]",
+        "applicationSubCategory": "[SubCategory]",
+        "description": "[App description — max 4000 chars]",
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "[Rating]",
+          "ratingCount": "[Count]"
+        },
+        "offers": {
+          "@type": "Offer",
+          "price": "[0 for free]",
+          "priceCurrency": "USD"
+        },
+        "downloadUrl": "[Google Play URL]",
+        "installUrl": "[Google Play URL]",
+        "softwareVersion": "[Version]",
+        "datePublished": "[ISO Date]",
+        "author": {
+          "@type": "Organization",
+          "name": "[Developer Name]"
+        },
+        "screenshot": "[Screenshot URL]",
+        "interactionStatistic": {
+          "@type": "InteractionCounter",
+          "interactionType": "https://schema.org/InstallAction",
+          "userInteractionCount": "[Install Count]"
+        }
+      }
     }
   ]
 }

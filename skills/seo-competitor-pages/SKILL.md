@@ -165,6 +165,19 @@ competitive intent keywords with accurate, structured content.
 - Include hidden costs (setup fees, per-user pricing, overage charges)
 - Link to full pricing page
 
+### Marketplace Price Comparison (DataForSEO Merchant API)
+
+When analyzing e-commerce competitors and DataForSEO Merchant API is available:
+
+1. **Real-time pricing:** Fetch current prices from Google Shopping and Amazon using
+   `python3 scripts/dataforseo_merchant.py products "<product keyword>" --marketplace google`
+2. **Inject live data** into the comparison table instead of manual research
+3. **Include provenance note:** "Price data via DataForSEO Merchant API, checked [date]"
+4. **Seller landscape:** Show number of sellers per product, price range, and review volume
+5. **Cross-marketplace delta:** Compare Google Shopping vs Amazon pricing for same products
+
+For deeper product listing analysis, use `/seo ecommerce analyze <keyword>`.
+
 ### Trust Signals
 - "Last updated [date]" timestamp
 - Author with relevant expertise

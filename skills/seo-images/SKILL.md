@@ -147,6 +147,15 @@ Add `decoding="async"` to non-LCP images to prevent image decoding from blocking
 - Recommend CDN for image-heavy sites
 - Check for edge caching headers
 
+### Social Visual Trends (Optional)
+
+If DataForSEO Social Media API is available, use Pinterest engagement data to inform image optimization:
+
+- Run `python3 scripts/dataforseo_social.py pinterest-trends "<keyword>"` to identify trending image formats
+- Pinterest engagement shows which visual styles drive sharing — compare top-pinned images against site's current image formats
+- Recommend image dimensions and styles that match high-engagement Pinterest content (infographics, step-by-step, data visualizations)
+- For full social signal analysis: `/seo social pinterest <keyword>`
+
 ## Output
 
 ### Image Audit Summary

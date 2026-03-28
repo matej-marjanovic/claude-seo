@@ -71,6 +71,13 @@ When generating schema for a page:
 3. Generate valid JSON-LD with all required + recommended properties
 4. Include only truthful, verifiable data. Use placeholders clearly marked for user to fill
 5. Validate output before presenting
+6. **E-commerce enrichment (optional):** If page is detected as a product page AND
+   DataForSEO Merchant API is available:
+   - Auto-populate `Product.offers.price` and `Product.offers.availability` from live Merchant data
+   - Add `Product.offers.seller` from Sellers API
+   - Inject product specs as `Product.additionalProperty` entries from Specs API
+   - Add competitor price context as a NOTE (not in schema — schema must reflect own product only)
+   - Run: `python3 scripts/dataforseo_merchant.py products "<product name>"` to get market data
 
 ## Common Schema Templates
 
