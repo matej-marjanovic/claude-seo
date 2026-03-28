@@ -4,12 +4,15 @@
 
 This repository contains **Claude SEO**, a Tier 4 Claude Code skill for comprehensive
 SEO analysis across all industries. It follows the Agent Skills open standard and the
-3-layer architecture (directive, orchestration, execution). 15 core sub-skills (+ 2
-extensions), 10 core subagents (+ 2 extension agents), and an extensible reference
+3-layer architecture (directive, orchestration, execution). 15 core sub-skills (+ 5
+extensions), 10 core subagents (+ 4 extension agents), and an extensible reference
 system cover technical SEO, content quality,
 schema markup, image optimization, sitemap architecture, AI search optimization,
-local SEO (GBP, citations, reviews, map pack), and maps intelligence (geo-grid
-rank tracking, GBP auditing, review intelligence, competitor radius mapping).
+local SEO (GBP, citations, reviews, map pack), maps intelligence (geo-grid
+rank tracking, GBP auditing, review intelligence, competitor radius mapping),
+e-commerce marketplace intelligence (Google Shopping, Amazon), App Store
+Optimization (ASO), social signal analysis (Reddit, Pinterest), and
+cross-platform review intelligence.
 
 ## Architecture
 
@@ -17,9 +20,9 @@ rank tracking, GBP auditing, review intelligence, competitor radius mapping).
 claude-seo/
   CLAUDE.md                          # Project instructions (this file)
   .claude-plugin/
-    plugin.json                    # Plugin manifest (v1.7.0)
+    plugin.json                    # Plugin manifest (v1.8.0)
     marketplace.json               # Marketplace catalog for distribution
-  skills/                            # 17 skills (auto-discovered)
+  skills/                            # 20 skills (auto-discovered)
     seo/                           # Main orchestrator skill
       SKILL.md                     # Entry point, routing table, core rules
       references/                  # On-demand knowledge files (10 files)
@@ -46,7 +49,14 @@ claude-seo/
     seo-image-gen/              # AI image generation for SEO assets
       SKILL.md
       references/                # Image gen reference files (7 files)
-  agents/                          # 12 subagents (auto-discovered)
+    seo-ecommerce/              # E-commerce marketplace intelligence
+      SKILL.md
+      references/                # Merchant API endpoint reference (1 file)
+    seo-aso/                    # App Store Optimization
+      SKILL.md
+      references/                # ASO best practices reference (1 file)
+    seo-social-signals/SKILL.md # Social signal analysis (Reddit, Pinterest)
+  agents/                          # 14 subagents (auto-discovered)
     seo-technical.md             # Crawlability, indexability, security
     seo-content.md               # E-E-A-T, readability, thin content
     seo-schema.md                # Structured data validation
@@ -59,9 +69,15 @@ claude-seo/
     seo-google.md                # Google API analyst (CrUX, GSC, GA4)
     seo-dataforseo.md            # DataForSEO data analyst
     seo-image-gen.md             # SEO image audit analyst
+    seo-ecommerce.md             # E-commerce marketplace intelligence
+    seo-aso.md                   # App Store Optimization
   hooks/                           # Quality gate hooks
     hooks.json                   # PostToolUse schema validation
   scripts/                         # Python execution scripts
+    dataforseo_normalize.py      # JSON-to-Markdown normalizer for DataForSEO
+    dataforseo_merchant.py       # Merchant API client (Google Shopping, Amazon)
+    dataforseo_reviews.py        # Reviews API client (Google, Trustpilot, Tripadvisor)
+    dataforseo_social.py         # Social Media API client (Pinterest, Reddit)
   schema/                          # Schema.org JSON-LD templates
   extensions/                      # Optional add-on install helpers
     dataforseo/                  # DataForSEO MCP install scripts
@@ -89,6 +105,9 @@ claude-seo/
 | `/seo hreflang <url>` | International SEO / hreflang audit |
 | `/seo google [command] [url]` | Google SEO APIs (GSC, PageSpeed, CrUX, Indexing, GA4) |
 | `/seo image-gen [use-case] <desc>` | AI image generation for SEO assets (extension) |
+| `/seo ecommerce [command] <keyword>` | E-commerce marketplace intelligence (extension) |
+| `/seo aso [command] <keyword\|app_id>` | App Store Optimization (extension) |
+| `/seo social [command] <keyword\|url>` | Social signal analysis — Reddit, Pinterest (extension) |
 
 ## Development Rules
 
@@ -124,7 +143,7 @@ Part of the Claude Code skill family:
 ## Key Principles
 
 1. **Progressive Disclosure**: Metadata always loaded, instructions on activation, resources on demand
-2. **Industry Detection**: Auto-detect SaaS, e-commerce, local, publisher, agency
-3. **Parallel Execution**: Full audits spawn up to 11 subagents simultaneously
-4. **Extension System**: DataForSEO MCP for live data, Banana MCP for AI image generation
+2. **Industry Detection**: Auto-detect SaaS, e-commerce, local, publisher, agency, app/mobile
+3. **Parallel Execution**: Full audits spawn up to 14 subagents simultaneously
+4. **Extension System**: DataForSEO MCP for live data (SERP, Merchant, App Data, Social, Reviews), Banana MCP for AI image generation
 5. **Cost Awareness**: DataForSEO calls go through cost estimation and configurable approval

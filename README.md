@@ -4,7 +4,7 @@
 
 # Claude SEO - SEO Audit Skill for Claude Code, Cursor & Antigravity
 
-Comprehensive SEO analysis skill for Claude Code — also compatible with Cursor, Cursor Cloud, and Google Deepmind Antigravity (Gemini). Covers technical SEO, on-page analysis, content quality (E-E-A-T), schema markup, image optimization, sitemap architecture, AI search optimization (GEO), local SEO, maps intelligence, Google SEO APIs (Search Console, PageSpeed, CrUX, GA4), PDF report generation, and strategic planning.
+Comprehensive SEO and omnichannel digital presence analysis skill for Claude Code — also compatible with Cursor, Cursor Cloud, and Google Deepmind Antigravity (Gemini). Covers technical SEO, on-page analysis, content quality (E-E-A-T), schema markup, image optimization, sitemap architecture, AI search optimization (GEO), local SEO, maps intelligence, e-commerce marketplace intelligence (Google Shopping, Amazon), App Store Optimization (ASO), social signal analysis (Reddit, Pinterest), cross-platform review intelligence, Google SEO APIs (Search Console, PageSpeed, CrUX, GA4), PDF report generation, and strategic planning.
 
 ![SEO Command Demo](screenshots/seo-command-demo.gif)
 
@@ -192,6 +192,9 @@ claude
 | `/seo hreflang <url>` | Hreflang/i18n SEO audit and generation |
 | `/seo google [command] [url]` | Google SEO APIs (GSC, PageSpeed, CrUX, Indexing, GA4) |
 | `/seo google report [type]` | Generate PDF/HTML report with charts (cwv-audit, gsc-performance, full) |
+| `/seo ecommerce [command] <keyword>` | E-commerce marketplace intelligence (Google Shopping, Amazon) |
+| `/seo aso [command] <keyword\|app_id>` | App Store Optimization (Google Play, Apple App Store) |
+| `/seo social [command] <keyword\|url>` | Social signal analysis (Reddit, Pinterest) |
 
 ### `/seo programmatic [url|plan]`
 **Programmatic SEO Analysis & Planning**
@@ -228,6 +231,42 @@ Validate and generate hreflang tags for multi-language sites.
 - Detect common mistakes (missing returns, invalid codes, HTTP/HTTPS mismatch)
 - Cross-domain hreflang support
 - Language/region code validation (ISO 639-1 + ISO 3166-1)
+
+### `/seo ecommerce [command] <keyword>`
+**E-commerce Marketplace Intelligence** (extension, requires DataForSEO Merchant API)
+
+Analyze product visibility and pricing across Google Shopping and Amazon.
+
+**Capabilities:**
+- Product listing analysis with price distribution and seller landscape
+- Marketplace keyword gap (organic vs Shopping visibility)
+- Price competitiveness scoring (0-100) with seller comparison
+- Cross-marketplace comparison (Google Shopping vs Amazon)
+- Auto-enrichment of Product schema with live pricing data
+
+### `/seo aso [command] <keyword|app_id>`
+**App Store Optimization** (extension, requires DataForSEO App Data API)
+
+Track app visibility and optimize store listings on Google Play and Apple App Store.
+
+**Capabilities:**
+- App keyword ranking across both stores
+- Competitor app analysis (rating, reviews, installs, update frequency)
+- Store listing audit against ASO best practices (title, screenshots, description)
+- ASO Score (0-100) with per-dimension breakdown
+- MobileApplication schema generation (iOS + Android templates)
+
+### `/seo social [command] <keyword|url>`
+**Social Signal Analysis** (extension, uses DataForSEO Business Data API)
+
+Discover content opportunities from Reddit and Pinterest engagement.
+
+**Capabilities:**
+- Reddit opportunity discovery (trending discussions, unanswered questions)
+- Pinterest engagement trends (top-pinned content, visual format analysis)
+- Social presence score (0-100) aggregated across platforms
+- Content gap identification from social discussions
+- Feeds into content strategy and image optimization
 
 ## Features
 
@@ -293,8 +332,8 @@ Direct integration with Google's SEO data:
 
 ```
 ~/.claude/skills/seo/         # Main orchestrator skill
-~/.claude/skills/seo-*/       # Sub-skills (15 + 2 extensions)
-~/.claude/agents/seo-*.md     # Subagents (10 + 2 extensions)
+~/.claude/skills/seo-*/       # Sub-skills (15 + 5 extensions)
+~/.claude/agents/seo-*.md     # Subagents (10 + 4 extensions)
 ```
 
 ### Video & Live Schema (New)
@@ -308,6 +347,12 @@ Additional schema types for video content, live streaming, and key moments:
 See `schema/templates.json` for ready-to-use JSON-LD snippets.
 
 ### Recently Added
+- E-commerce marketplace intelligence (`/seo ecommerce`) — Google Shopping + Amazon
+- App Store Optimization (`/seo aso`) — Google Play + Apple App Store
+- Social signal analysis (`/seo social`) — Reddit + Pinterest
+- Cross-platform review intelligence — Google, Trustpilot, Tripadvisor
+- MobileApplication schema templates (iOS + Android)
+- DataForSEO JSON-to-Markdown normalizer for context window efficiency
 - Programmatic SEO skill (`/seo programmatic`)
 - Competitor comparison pages skill (`/seo competitor-pages`)
 - Multi-language hreflang validation (`/seo hreflang`)
@@ -347,7 +392,7 @@ Optional add-ons that integrate external data sources via MCP servers.
 
 ### DataForSEO
 
-Live SERP data, keyword research, backlinks, on-page analysis, content analysis, business listings, AI visibility checking, and LLM mention tracking. 22 commands across 9 API modules.
+Live SERP data, keyword research, backlinks, on-page analysis, content analysis, business listings, AI visibility checking, LLM mention tracking, e-commerce marketplace data (Google Shopping, Amazon), app store data (Google Play, Apple App Store), social signals (Pinterest, Reddit), and cross-platform reviews (Google, Trustpilot, Tripadvisor). 35+ commands across 13 API modules.
 
 ```bash
 # Install (requires DataForSEO account)
@@ -361,6 +406,11 @@ Live SERP data, keyword research, backlinks, on-page analysis, content analysis,
 /seo dataforseo backlinks example.com
 /seo dataforseo ai-mentions your brand
 /seo dataforseo ai-scrape your brand name
+
+# Omnichannel commands (new in v1.8.0)
+/seo ecommerce analyze running shoes
+/seo aso search meditation app
+/seo social reddit seo tools
 ```
 
 See [DataForSEO Extension](extensions/dataforseo/README.md) for full documentation.
@@ -400,6 +450,8 @@ Claude SEO is part of a family of Claude Code skills that work together:
 2. `/blog write "target keyword"` -- create SEO-optimized blog posts
 3. `/seo image-gen hero "blog topic"` -- generate hero images (banana extension)
 4. `/seo geo https://example.com/blog/post` -- optimize for AI citations
+5. `/seo social reddit "target keyword"` -- find content ideas from Reddit
+6. `/seo ecommerce analyze "product keyword"` -- check marketplace visibility
 
 ## Documentation
 

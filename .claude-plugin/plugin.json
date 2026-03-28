@@ -1,7 +1,7 @@
 {
   "name": "claude-seo",
-  "version": "1.7.0",
-  "description": "Comprehensive SEO analysis skill for Claude Code. Covers technical SEO, content quality (E-E-A-T), schema markup, image optimization, sitemap architecture, AI search optimization (GEO), local SEO (GBP, citations, reviews, map pack), maps intelligence, and strategic planning across all industries.",
+  "version": "1.8.0",
+  "description": "Comprehensive SEO and omnichannel digital presence analysis skill for Claude Code. Covers technical SEO, content quality (E-E-A-T), schema markup, image optimization, sitemap architecture, AI search optimization (GEO), local SEO (GBP, citations, reviews, map pack), maps intelligence, e-commerce marketplace intelligence (Google Shopping, Amazon), App Store Optimization (ASO), social signal analysis (Reddit, Pinterest), cross-platform review intelligence, and strategic planning across all industries.",
   "author": {
     "name": "AgriciDaniel",
     "url": "https://github.com/AgriciDaniel"
@@ -25,6 +25,15 @@
     "google-search-console",
     "pagespeed",
     "crux",
-    "ga4"
+    "ga4",
+    "ecommerce",
+    "merchant",
+    "google-shopping",
+    "amazon",
+    "app-store-optimization",
+    "aso",
+    "social-signals",
+    "reviews",
+    "omnichannel"
   ]
 }
